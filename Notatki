@@ -1,0 +1,68 @@
+tester@tester-m:~/magazyn$ sudo grep -i error /var/log/syslog | cut -f1,2,3 -d' '
+Oct 26 08:59:24
+Oct 26 09:22:08
+Oct 26 10:46:52
+Oct 26 12:04:12
+Oct 26 12:04:12
+tester@tester-m:~/magazyn$ sudo grep -i error /var/log/syslog | cut -f1,2,3 -d' '|cut -f1 -d':'
+Oct 26 08
+Oct 26 09
+Oct 26 10
+Oct 26 12
+Oct 26 12
+tester@tester-m:~/magazyn$ sudo grep -i error /var/log/syslog | cut -f1,2,3 -d' '|cut -f1 -d':'|sort|uniq
+Oct 26 08
+Oct 26 09
+Oct 26 10
+Oct 26 12
+
+
+tester@tester-m:~/magazyn$ tree
+.
+├── mleczne
+│   └── produkty.txt
+└── slodycze
+    └── produkty.txt
+
+2 directories, 2 files
+tester@tester-m:~/magazyn$ cat */*.txt
+mlekovita, 5
+zimnemleko, 3
+wedel, 2
+goplana, 3
+tester@tester-m:~/magazyn$ cat */*.txt |3
+3: command not found
+tester@tester-m:~/magazyn$ cat */*.txt |grep 3
+zimnemleko, 3
+goplana, 3
+tester@tester-m:~/magazyn$ cat */3.txt
+cat: '*/3.txt': No such file or directory
+tester@tester-m:~/magazyn$ cat */*3.txt
+cat: '*/*3.txt': No such file or directory
+tester@tester-m:~/magazyn$ cat */*.txt |grep 3
+zimnemleko, 3
+goplana, 3
+tester@tester-m:~/magazyn$ tree|grep 3
+tester@tester-m:~/magazyn$ cat */*.txt
+mlekovita, 5
+zimnemleko, 3
+wedel, 2
+goplana, 3
+tester@tester-m:~/magazyn$ cat */*.txt |cut -f1
+mlekovita, 5
+zimnemleko, 3
+wedel, 2
+goplana, 3
+
+
+--2 linie przed i 2 linie po error
+sudo grep -i error -A 2 -B 2 /var/log/syslog 
+
+--egrep po przedzialach a-d i 0-9 w 6 znakach- zmienna -o pokazuje tylko to,
+sudo egrep -o '[A-F0-9]{6}' /var/log/syslog|sort|uniq
+
+--egrep -o wyszukaj wyraz  resource: dowolny znak i dowolne iteracje
+sudo egrep -o 'resource:[^:]+' /var/log/syslog|sort|uniq -c
+
+szukamy stringu resource: potem[^negacja potem dowolny :] + wszystko potem
+
